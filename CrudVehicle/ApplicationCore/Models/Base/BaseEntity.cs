@@ -12,6 +12,7 @@ namespace ApplicationCore.Models.Base
     {
         [Column("Id")]
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
         
 

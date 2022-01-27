@@ -1,8 +1,12 @@
+using ApplicationCore.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Repositories;
+using Infrastructure.Repositories.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,12 +32,16 @@ namespace CrudVehicle
         public void ConfigureServices(IServiceCollection services)
         {
 
-            
+            services.AddDbContext<CrudVehicleDataContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrudVehicle", Version = "v1" });
             });
+
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

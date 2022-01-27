@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ApplicationCore.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace Infrastructure.Data
 {
     public class CrudVehicleDataContext : DbContext
     {
-        public DbSet<Make> Makes { get; set; }
+        public CrudVehicleDataContext(DbContextOptions<CrudVehicleDataContext> options)
+        : base(options)
+        {
+
+        }
+        public DbSet<Make> Makes { get; private set; }
+        public DbSet<Car> Cars { get; private set; }
+
+        
     }
 }
