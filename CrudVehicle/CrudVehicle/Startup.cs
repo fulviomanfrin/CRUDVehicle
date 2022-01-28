@@ -1,4 +1,6 @@
 using ApplicationCore.Interfaces;
+using ApplicationCore.Interfaces.Services;
+using ApplicationCore.Services;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Repositories.Generic;
@@ -40,6 +42,7 @@ namespace CrudVehicle
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrudVehicle", Version = "v1" });
             });
 
+            services.AddScoped<ICarService, CarService>();
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
         }

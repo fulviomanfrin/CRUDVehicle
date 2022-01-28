@@ -8,13 +8,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface ICarRepository
+    public interface ICarRepository : IRepository<Car>
     {
-        Car GetById(int id);
-        IEnumerable<Car> List();
-        IEnumerable<Car> List(Expression<Func<Car, bool>> predicate);
-        void Create(Car entity);
-        void Delete(Car entity);
-        void Update(Car entity);
+        Car GetByName(string name);
     }
 }

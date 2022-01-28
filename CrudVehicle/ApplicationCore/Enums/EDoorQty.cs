@@ -8,7 +8,7 @@ namespace ApplicationCore.Enums
 {
     public enum EDoorQty
     {
-        NoDoor = 0,
+        Zero = 0,
         One = 1,
         Two = 2,
         Three = 3,

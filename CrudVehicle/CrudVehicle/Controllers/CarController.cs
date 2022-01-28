@@ -1,10 +1,8 @@
-﻿using ApplicationCore.Interfaces;
+﻿using ApplicationCore.InputModels;
+using ApplicationCore.Interfaces;
+using ApplicationCore.Interfaces.Services;
+using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CrudVehicle.Controllers
 {
@@ -14,17 +12,55 @@ namespace CrudVehicle.Controllers
     {
         
         private ICarRepository _repository;
+        private ICarService _carService;
         //private readonly ILogger<CarController> _logger;
 
-        public CarController(ICarRepository repository)
+        public CarController(ICarRepository repository, ICarService carService)
         {
             _repository = repository;
+            _carService = carService;
         }
 
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(_repository.List());
+            return Ok(_repository.FindAll());
         }
+
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            var car = _repository.FindById(id);
+            if (car == null) return NotFound();
+            return Ok(car);
+        }
+
+        [HttpGet("GetByName/{model}")]
+        public ActionResult GetByName(string model)
+        {
+            var car = _repository.GetByName(model);
+            if (car == null) return NotFound();
+            return Ok(car);
+        }
+
+        [HttpPost]
+        public ActionResult Post([FromBody] CarInputModel input)
+        {
+            if (input == null) return BadRequest();
+            var result = _carService.SaveCar(input);
+            
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+           var result = _carService.Delete(id);
+            return Ok(result);
+        }
+
+
+
+
     }
 }

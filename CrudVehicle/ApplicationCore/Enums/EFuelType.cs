@@ -8,8 +8,11 @@ namespace ApplicationCore.Enums
 {
     public enum EFuelType
     {
-        Flex = 0,
-        Gasoline = 1,
-        Etanol = 2,
+        
+        Flex,
+        
+        Gasoline,
+        
+        Etanol
     }
 }

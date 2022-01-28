@@ -16,5 +16,12 @@ namespace Infrastructure.Repositories
         {
 
         }
+
+        public Car GetByName(string name)
+        {
+            
+            return dataset.FirstOrDefault(x => x.Model == name);
+
+        }
     }
 }

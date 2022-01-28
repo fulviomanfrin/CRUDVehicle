@@ -11,19 +11,39 @@ using System.Threading.Tasks;
 namespace ApplicationCore.Models
 {
     [Table("Cars")]
-    public class Car : Vehicle
+    public class Car : BaseEntity
     {
+        public Car( string model, int makeId, int doorQty, ETransmissionType transmissionType, int year, EFuelType fuelType)
+        {
+            
+            Model = model;
+            MakeId = makeId;
+            DoorQty = doorQty;
+            TransmissionType = transmissionType;
+            Year = year;
+            FuelType = fuelType;
+        }
+
         [Required]
-        [MinLength(3)]
-        [MaxLength(80)]
+        [MaxLength(24)]
         [Column("Name", TypeName = "NVARCHAR")]
         public string Model { get; private set; }
-        [ForeignKey("MakeId")] public int MakeId { get; set; }
-        public Make Make { get; private set; }
-        public EDoorQty DoorQty { get; private set; }
+        [ForeignKey("MakeId")] 
+        public int MakeId { get; private set; }
+        public int DoorQty { get; private set; }
         public ETransmissionType TransmissionType { get; private set; }
         public int Year { get; private set; }
         public EFuelType FuelType { get; private set; }
 
+        public void UpdateData(string model, int makeId, int doorQty, ETransmissionType transmissionType, int year, EFuelType fuelType)
+        {
+
+            Model = model;
+            MakeId = makeId;
+            DoorQty = doorQty;
+            TransmissionType = transmissionType;
+            Year = year;
+            FuelType = fuelType;
+        }
     }
 }

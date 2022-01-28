@@ -10,12 +10,12 @@ namespace ApplicationCore.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        T GetById(int id);
-        IEnumerable<T> List();
+        T FindById(int id);
+        List<T> FindAll();
         IEnumerable<T> List(Expression<Func<T, bool>> predicate);
-        void Create(T entity);
+        T Create(T entity);
         void Delete(T entity);
-        void Update(T entity);
+        T Update(T entity);
     }
 
     

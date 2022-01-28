@@ -8,8 +8,8 @@ namespace ApplicationCore.Enums
 {
     public enum ETransmissionType
     {
-        Manual = 0,
-        Amt = 1,
-        Automatic = 2,
+        Manual,
+        Amt,
+        Automatic
     }
 }

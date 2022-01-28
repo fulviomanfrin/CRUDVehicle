@@ -37,22 +37,17 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("NVARCHAR(80)")
+                        .HasMaxLength(24)
+                        .HasColumnType("NVARCHAR(24)")
                         .HasColumnName("Name");
 
                     b.Property<int>("TransmissionType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VehicleType")
                         .HasColumnType("int");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MakeId");
 
                     b.ToTable("Cars");
                 });
@@ -74,17 +69,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Makes");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Models.Car", b =>
-                {
-                    b.HasOne("ApplicationCore.Models.Make", "Make")
-                        .WithMany()
-                        .HasForeignKey("MakeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Make");
                 });
 #pragma warning restore 612, 618
         }

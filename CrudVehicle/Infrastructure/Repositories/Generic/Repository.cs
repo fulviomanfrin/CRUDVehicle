@@ -11,21 +11,27 @@ namespace Infrastructure.Repositories.Generic
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly CrudVehicleDataContext _dbContext;
+        protected DbSet<T> dataset;
 
         public Repository(CrudVehicleDataContext dbContext)
         {
             _dbContext = dbContext;
+            dataset = _dbContext.Set<T>();
         }
 
-        public virtual T GetById(int id)
+        public T FindById(int id)
         {
-            return _dbContext.Set<T>().Find(id);
+            return dataset.SingleOrDefault(p => p.Id.Equals(id));
         }
 
-        public virtual IEnumerable<T> List()
+        public List<T> FindAll()
         {
-            return _dbContext.Set<T>().AsEnumerable();
+            return dataset.ToList();
         }
+        //public virtual IEnumerable<T> List()
+        //{
+        //    return _dbContext.Set<T>().AsEnumerable();
+        //}
 
         public virtual IEnumerable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
@@ -34,16 +40,32 @@ namespace Infrastructure.Repositories.Generic
                    .AsEnumerable();
         }
 
-        public void Create(T entity)
+        public T Create(T item)
         {
-            _dbContext.Set<T>().Add(entity);
-            _dbContext.SaveChanges();
+            try
+            {
+                dataset.Add(item);
+                _dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return item;
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            
+            var model = dataset.SingleOrDefault(x => x.Id == entity.Id);
+            
+
+            //_dbContext.UpdateRange(model.Model, model.MakeId, model.DoorQty, model.TransmissionType, model.Year, model.FuelType);
+           
+            _dbContext.Entry(model).State = EntityState.Modified;
             _dbContext.SaveChanges();
+            //return entity;
+            return entity;
         }
 
         public void Delete(T entity)
