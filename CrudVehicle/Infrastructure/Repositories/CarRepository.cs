@@ -19,9 +19,13 @@ namespace Infrastructure.Repositories
 
         public Car GetByName(string name)
         {
-            
             return dataset.FirstOrDefault(x => x.Model == name);
 
+        }
+
+        public bool ExistsWithName(string name) 
+        {
+            return dataset.Any(x => x.Model == name);
         }
     }
 }

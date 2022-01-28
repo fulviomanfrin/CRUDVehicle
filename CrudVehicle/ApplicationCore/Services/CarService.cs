@@ -16,8 +16,12 @@ namespace ApplicationCore.Services
 
         public bool SaveCar(CarInputModel input)
         {
+            StartValidations(input);
+
             if (input.Id == null)
             {
+                
+
                 var car = new Car(input.Model, input.MakeId, input.DoorQty, input.TransmissionType, input.Year, input.FuelType);
                 _repository.Create(car);
             }
@@ -28,6 +32,8 @@ namespace ApplicationCore.Services
                 {
                     throw new Exception();
                 }
+
+
                 car.UpdateData(input.Model, input.MakeId, input.DoorQty, input.TransmissionType, input.Year, input.FuelType);
                 _repository.Update(car);
             }
@@ -46,7 +52,14 @@ namespace ApplicationCore.Services
             _repository.Delete(car);
             return true;
         }
-                
+        
+        public void StartValidations(CarInputModel input)
+        {
+
+            if (_repository.ExistsWithName(input.Model))
+                throw new Exception("Model already exists in records");
+
+        }
 
     }
 }

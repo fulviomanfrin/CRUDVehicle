@@ -12,7 +12,6 @@ namespace ApplicationCore.Interfaces
     {
         T FindById(int id);
         List<T> FindAll();
-        IEnumerable<T> List(Expression<Func<T, bool>> predicate);
         T Create(T entity);
         void Delete(T entity);
         T Update(T entity);

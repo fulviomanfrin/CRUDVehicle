@@ -28,20 +28,10 @@ namespace Infrastructure.Repositories.Generic
         {
             return dataset.ToList();
         }
-        //public virtual IEnumerable<T> List()
-        //{
-        //    return _dbContext.Set<T>().AsEnumerable();
-        //}
-
-        public virtual IEnumerable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
-        {
-            return _dbContext.Set<T>()
-                   .Where(predicate)
-                   .AsEnumerable();
-        }
-
+        
         public T Create(T item)
         {
+            
             try
             {
                 dataset.Add(item);
@@ -59,12 +49,8 @@ namespace Infrastructure.Repositories.Generic
             
             var model = dataset.SingleOrDefault(x => x.Id == entity.Id);
             
-
-            //_dbContext.UpdateRange(model.Model, model.MakeId, model.DoorQty, model.TransmissionType, model.Year, model.FuelType);
-           
             _dbContext.Entry(model).State = EntityState.Modified;
             _dbContext.SaveChanges();
-            //return entity;
             return entity;
         }
 
