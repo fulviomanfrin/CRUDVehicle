@@ -34,6 +34,16 @@ namespace CrudVehicle
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+                
+            });
+            
+
             services.AddDbContext<CrudVehicleDataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SQLConnection")));
             services.AddControllers();
@@ -56,6 +66,8 @@ namespace CrudVehicle
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CrudVehicle v1"));
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 

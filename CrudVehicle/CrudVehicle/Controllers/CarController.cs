@@ -2,7 +2,10 @@
 using ApplicationCore.Interfaces;
 using ApplicationCore.Interfaces.Services;
 using ApplicationCore.Models;
+using ApplicationCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace CrudVehicle.Controllers
 {
@@ -24,7 +27,21 @@ namespace CrudVehicle.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(_repository.FindAll());
+            var vehicles = _repository.FindAll();
+            var viewModels = vehicles.Select(vehicle =>
+                new CarViewModel
+                {
+                    Id = vehicle.Id,
+                    Model = vehicle.Model,
+                    MakeId = vehicle.MakeId,
+                    DoorQty = vehicle.DoorQty,
+                    TransmissionType = vehicle.TransmissionType,
+                    Year = vehicle.Year,
+                    FuelType = vehicle.FuelType,
+
+
+                } );
+            return Ok(viewModels);
         }
 
         [HttpGet("{id}")]
@@ -46,10 +63,17 @@ namespace CrudVehicle.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] CarInputModel input)
         {
-            if (input == null) return BadRequest();
-            var result = _carService.SaveCar(input);
-            
-            return Ok(result);
+            try
+            {
+                if (input == null) return BadRequest();
+                var result = _carService.SaveCar(input);
+
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]

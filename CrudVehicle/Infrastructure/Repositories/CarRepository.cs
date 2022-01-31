@@ -23,9 +23,12 @@ namespace Infrastructure.Repositories
 
         }
 
-        public bool ExistsWithName(string name) 
+        public bool ExistsWithName(string name, int id = 0) 
         {
-            return dataset.Any(x => x.Model == name);
+            var vehicles = dataset.Where(x => x.Model == name );
+            if (id != 0)
+                return vehicles.Any(vehicle => vehicle.Id != id);
+            return vehicles.Any();
         }
     }
 }

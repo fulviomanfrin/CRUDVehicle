@@ -27,6 +27,7 @@ namespace ApplicationCore.Services
             }
             else
             {
+                
                 var car = _repository.FindById(input.Id.Value);
                 if (car == null)
                 {
@@ -56,7 +57,7 @@ namespace ApplicationCore.Services
         public void StartValidations(CarInputModel input)
         {
 
-            if (_repository.ExistsWithName(input.Model))
+            if (_repository.ExistsWithName(input.Model, input.Id ?? 0))
                 throw new Exception("Model already exists in records");
 
         }
