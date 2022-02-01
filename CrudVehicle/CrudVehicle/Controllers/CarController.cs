@@ -1,7 +1,6 @@
 ﻿using ApplicationCore.InputModels;
 using ApplicationCore.Interfaces;
 using ApplicationCore.Interfaces.Services;
-using ApplicationCore.Models;
 using ApplicationCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;

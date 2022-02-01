@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApplicationCore.Enums
+﻿namespace ApplicationCore.Enums
 {
     public enum EFuelType
     {
@@ -15,4 +9,6 @@ namespace ApplicationCore.Enums
         
         Etanol
     }
+
+    
 }
