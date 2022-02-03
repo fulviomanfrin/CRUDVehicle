@@ -22,7 +22,7 @@ namespace ApplicationCore.Services
             {
                 
 
-                var car = new Car(input.Model, input.MakeId, input.DoorQty, input.TransmissionType, input.Year, input.FuelType);
+                var car = new Car(input.Model, input.MakeId, input.MakeName, input.DoorQty, input.TransmissionType, input.Year, input.FuelType);
                 _repository.Create(car);
             }
             else
@@ -35,7 +35,7 @@ namespace ApplicationCore.Services
                 }
 
 
-                car.UpdateData(input.Model, input.MakeId, input.DoorQty, input.TransmissionType, input.Year, input.FuelType);
+                car.UpdateData(input.Model, input.MakeId, input.MakeName, input.DoorQty, input.TransmissionType, input.Year, input.FuelType);
                 _repository.Update(car);
             }
 

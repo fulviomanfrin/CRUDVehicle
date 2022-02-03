@@ -26,7 +26,9 @@ namespace ApplicationCore.Models
         public string Model { get; private set; }
         [ForeignKey("MakeId")] 
         public int MakeId { get; private set; }
-        [ForeignKey("Name")]
+        [ForeignKey("MakeName")]
+        [MaxLength(24)]
+        [Required]
         public string MakeName { get; private set; }
         public int DoorQty { get; private set; }
         public ETransmissionType TransmissionType { get; private set; }

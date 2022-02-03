@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CrudVehicleDataContext))]
-    [Migration("20220127173027_initialcreation")]
-    partial class initialcreation
+    [Migration("20220203175130_SecondMigration")]
+    partial class SecondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,11 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("MakeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("MakeName")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
 
                     b.Property<string>("Model")
                         .IsRequired()

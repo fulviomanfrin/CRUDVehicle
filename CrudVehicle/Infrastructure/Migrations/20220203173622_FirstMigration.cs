@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Migrations
 {
-    public partial class initialcreation : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "NVARCHAR(24)", maxLength: 24, nullable: false),
                     MakeId = table.Column<int>(type: "int", nullable: false),
+                    MakeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DoorQty = table.Column<int>(type: "int", nullable: false),
                     TransmissionType = table.Column<int>(type: "int", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
