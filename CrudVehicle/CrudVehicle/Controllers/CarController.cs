@@ -33,6 +33,7 @@ namespace CrudVehicle.Controllers
                     Id = vehicle.Id,
                     Model = vehicle.Model,
                     MakeId = vehicle.MakeId,
+                    MakeName = vehicle.MakeName,
                     DoorQty = vehicle.DoorQty,
                     TransmissionType = vehicle.TransmissionType,
                     Year = vehicle.Year,
